@@ -13,7 +13,7 @@ namespace Octopus.Cli.Commands.Package
     {
         object result;
 
-        public DeletePackageCommand(IOctopusAsyncRepositoryFactory repositoryFactory,IOctopusFileSystem fileSystem, IOctopusClientFactory clientFactory, ICommandOutputProvider commandOutputProvider)
+        public DeletePackageCommand(IOctopusAsyncRepositoryFactory repositoryFactory, IOctopusFileSystem fileSystem, IOctopusClientFactory clientFactory, ICommandOutputProvider commandOutputProvider)
             : base(clientFactory, repositoryFactory, fileSystem, commandOutputProvider)
         {
             var options = Options.For("Deletion");
@@ -30,7 +30,7 @@ namespace Octopus.Cli.Commands.Package
             if (string.IsNullOrWhiteSpace(PackageVersion)) throw new CommandException("Please specify a package version using the parameter: --version=1.0.0");
 
             commandOutputProvider.Debug("Finding package: {PackageId:l} with version {Version:l}", PackageId, PackageVersion);
-            
+
             // If package == null client throws 404 caught in CliProgram
             var package = await Repository.BuiltInPackageRepository.GetPackage(PackageId, PackageVersion).ConfigureAwait(false);
 
@@ -39,7 +39,7 @@ namespace Octopus.Cli.Commands.Package
             result = new
             {
                 Status = "Success",
-                Package = new {PackageId, Version = PackageVersion}
+                Package = new { PackageId, Version = PackageVersion }
             };
         }
 

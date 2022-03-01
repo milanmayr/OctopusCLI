@@ -97,7 +97,6 @@ namespace Octo.Tests.Commands
                 .Test(Arg.Any<IOctopusAsyncRepository>(), Arg.Any<ChannelVersionRuleResource>(), Arg.Any<string>(), Arg.Any<string>())
                 .Returns(Task.FromResult(channelVersionRuleTestResult));
 
-
             var feeds = new List<FeedResource>
             {
                 feedResource

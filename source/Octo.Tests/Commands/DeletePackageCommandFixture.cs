@@ -33,14 +33,14 @@ namespace Octo.Tests.Commands
             deletePackageCommand.PackageId = packageId;
             deletePackageCommand.PackageVersion = packageVersion;
             Repository.BuiltInPackageRepository.GetPackage(packageId, packageVersion)
-                .Returns(new PackageFromBuiltInFeedResource { PackageId = packageId, Version = packageVersion});
+                .Returns(new PackageFromBuiltInFeedResource { PackageId = packageId, Version = packageVersion });
 
             await deletePackageCommand.Execute(CommandLineArgs.ToArray()).ConfigureAwait(false);
-            
+
             LogLines.Should().Contain("Package deleted");
-            
+
             deletePackageCommand.PrintJsonOutput();
-            
+
             var logOutput = LogOutput.ToString();
             Assert.True(logOutput.Contains("\"Status\": \"Success\""));
             Assert.True(logOutput.Contains($"\"PackageId\": \"{packageId}\""));
@@ -54,7 +54,7 @@ namespace Octo.Tests.Commands
             exec.ShouldThrow<CommandException>()
                 .WithMessage("Please specify a package id using the parameter: --packageId=XYZ");
         }
-        
+
         [Test]
         public void CommandException_ShouldNotSearchForPackageWhenThereIsNoPackageVersion()
         {
